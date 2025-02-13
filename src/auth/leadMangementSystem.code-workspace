@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../nodejsproject"
+		},
+		{
+			"path": "../../../megajavascriptCourse/React/express-api"
+		}
+	],
+	"settings": {}
+}
