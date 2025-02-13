@@ -10,7 +10,7 @@ exports.userValidation = [
     body('phone')
         .notEmpty().withMessage('phone number is required')
         .isLength({ max: 10 }).withMessage('enter a valid number')
-        .matches(/[0-9]/).withMessage('enter a valid number ')
+        .matches(/g/).withMessage('enter a valid number ')
         .isNumeric().withMessage('enter a valid number'),
 
     body('projectname')
@@ -37,7 +37,7 @@ exports.validation = (req, res, next) => {
     const errors = validationResult(req)
     console.log(errors)
 
-    if (errors.isEmpty) {
+    if (errors.isEmpty()) {
         return next()
     }
 
