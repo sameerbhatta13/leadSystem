@@ -1,21 +1,22 @@
-const express = require('express')
-require('dotenv').config()
-require('./DB/connection')
+require("dotenv").config();
+const express = require("express");
+const app = express();
 
-const app = express()
-let port = process.env.PORT
+const userRoute = require("./src/auth/auth.route");
+const { notFound, erroMiddleware } = require("./middleware/errorMiddleware");
 
-//import routes
-const userRoute = require('./src/auth/auth.routes')
-const { notFound, erroMiddleware } = require('./middleware/errorMiddleware')
+require("./DB/connection");
+let port = process.env.PORT || 5000;
 
-app.use(express.json())
+app.use(express.json());
+
 //implement routes
-app.use('/api', userRoute)
-//middleware
-app.use(notFound)
-app.use(erroMiddleware)
+app.use("/api", userRoute);
+
+//error middleware
+app.use(notFound);
+app.use(erroMiddleware);
 
 app.listen(port, () => {
-    console.log(`server is connected at ${port}`)
-})
+  console.log(`server is connected at ${port}`);
+});
