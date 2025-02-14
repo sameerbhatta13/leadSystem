@@ -9,18 +9,21 @@ exports.userValidation = [
 
     body('phone')
         .notEmpty().withMessage('phone number is required')
-        .isLength({ max: 10 }).withMessage('enter a valid number')
-        .matches(/g/).withMessage('enter a valid number ')
+        .isLength({ min: 10, max: 10 }).withMessage('enter a valid phone  number')
+        // .matches(/g/).withMessage('enter a valid number ')
         .isNumeric().withMessage('enter a valid number'),
 
-    body('projectname')
-        .notEmpty().withMessage('project Name required')
-        .isLength({ min: 3 }).withMessage('project name is smaller in length')
-        .isString().withMessage('provide a valid project name'),
+    body('email')
+        .notEmpty().withMessage('email is required')
+        .isEmail().withMessage('email format is incorrect'),
+
+    // body('projectname')
+    //     .notEmpty().withMessage('project Name required')
+    //     .isLength({ min: 3 }).withMessage('project name is smaller in length')
+    //     .isString().withMessage('provide a valid project name'),
 
     body('service')
         .notEmpty().withMessage('provide your service')
-        .isLength({ min: 2 }).withMessage('service name length is so small')
         .isString().withMessage('provide a name'),
 
     body('budget')

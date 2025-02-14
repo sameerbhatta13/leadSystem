@@ -5,31 +5,35 @@ const authSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true,
+    },
+
     phone: {
         type: Number,
         required: true
     },
-    projectname: {
-        type: String,
-        required: true
-    },
     service: {
         type: String,
+        enum: ["MERN stack", "Python Django", "Flutter"],
         required: true
     },
     budget: {
         type: Number,
-        required: true
     },
     status: {
         type: String,
-        enum: ['active', 'followup', 'cancel'],
-        default: 'active'
+        enum: ['pending', 'followup', 'cancel'],
+        default: 'pending'
 
     },
     folloUp: {
         type: String,
-        default: () => new Date().toLocaleString()
+        default: () => new Date()
+    },
+    visitdate: {
+        type: Date,
     },
     isFollowUp: {
         type: Boolean,
