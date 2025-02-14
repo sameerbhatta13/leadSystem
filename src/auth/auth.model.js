@@ -29,8 +29,8 @@ const authSchema = new mongoose.Schema({
 
     },
     folloUp: {
-        type: String,
-        default: () => new Date()
+        type: Date,
+        required: true
     },
     visitdate: {
         type: Date,

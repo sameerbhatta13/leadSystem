@@ -1,11 +1,19 @@
+const cron = require('node-cron')
 const ApiError = require('../utils/apiError')
 const asyncHandler = require('../utils/asyncHandler')
 const ApiResponse = require('../utils/apiResponse')
 const Auth = require('./auth.model')
 const sendEmail = require('../utils/sendEmail')
 
+
 exports.postAuth = asyncHandler(async (req, res) => {
     const { name, phone, email, service, budget } = req.body
+
+    const tDate = new Date()
+    tDate.setDate(tDate.getDate() + 1)
+    tDate.setHours(6, 0, 0, 0)
+
+    const followupUTC = new Date(tDate.getTime() - (tDate.getTimezoneOffset() * 60000))
 
 
     let user = new Auth({
@@ -13,31 +21,37 @@ exports.postAuth = asyncHandler(async (req, res) => {
         phone,
         email,
         service,
-        budget
+        budget,
+        folloUp: followupUTC
     })
 
     const existingUser = await Auth.findOne({ email: user.email })
 
     if (existingUser == null) {
         user = await user.save()
-
-        if (user.status == 'pending') {
-            await sendEmail({
-                subject: ` MAKE A CALL TO ${user.name}`,
-                html: `<h1>here is the detail information of the ${user.name}</h1>
-                <p>student phone Number:<b> ${user.phone} </b></p>
-                <p>student enquires for:<b> ${user.service}</b></p>
-                <p>course fees:<b> ${user.budget} </b></p>
-                `
-            })
-        }
-
         return res.status(200).json(new ApiResponse('successfully added the information', user))
     }
     else {
         throw new ('already exists')
     }
 
+})
+
+exports.getAuth = asyncHandler(async (req, res) => {
+    const users = await Auth.find()
+    if (!users) {
+        throw new ApiError('no user is found')
+    }
+    return res.status(200).json(new ApiResponse('here is the  users list ', users))
+})
+
+exports.getAuthById = asyncHandler(async (req, res) => {
+    const { id } = req.params
+    const existingUser = await Auth.findById(id)
+    if (!existingUser) {
+        throw new ApiError('user is not found')
+    }
+    return res.status(200).json(new ApiResponse('here is the user ', existingUser))
 })
 
 
@@ -56,7 +70,15 @@ exports.updateAuth = asyncHandler(async (req, res) => {
     else {
         return res.status(200).json(new ApiResponse('user updated successfully', user))
     }
+})
 
+exports.deleteAuth = asyncHandler(async (req, res) => {
+    const { id } = req.params
+    console.log(id)
 
-
+    const existingUser = await Auth.findOne({ _id: id })
+    if (!existingUser)
+        throw new ApiError('user is not exists')
+    const user = await Auth.findByIdAndDelete(id)
+    return res.status(200).json(new ApiResponse('user is deleted successfully'))
 })
