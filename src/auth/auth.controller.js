@@ -3,15 +3,15 @@ const ApiError = require('../utils/apiError')
 const asyncHandler = require('../utils/asyncHandler')
 const ApiResponse = require('../utils/apiResponse')
 const Auth = require('./auth.model')
-const sendEmail = require('../utils/sendEmail')
+
 
 
 exports.postAuth = asyncHandler(async (req, res) => {
     const { name, phone, email, service, budget } = req.body
 
     const tDate = new Date()
-    tDate.setDate(tDate.getDate() + 1)
-    tDate.setHours(6, 0, 0, 0)
+    tDate.setDate(tDate.getDate())
+    tDate.setHours(11, 0, 0, 0)
 
     const followupUTC = new Date(tDate.getTime() - (tDate.getTimezoneOffset() * 60000))
 
@@ -42,7 +42,9 @@ exports.getAuth = asyncHandler(async (req, res) => {
     if (!users) {
         throw new ApiError('no user is found')
     }
+    // res.render('userlist', { user: users })
     return res.status(200).json(new ApiResponse('here is the  users list ', users))
+
 })
 
 exports.getAuthById = asyncHandler(async (req, res) => {

@@ -1,0 +1,41 @@
+<% if (locals.user) { %>
+    <table class="w-[50%] border-collapse border border-spacing-2 p-2 mx-[25%] my-[5%]  ">
+        <thead class="">
+            <tr>
+                <th class="border border-gray-400 dark:border-gray-500 p-2">S.N</th>
+                <th class="border border-gray-400 dark:border-gray-500  p-2">full Name</th>
+                <th class="border border-gray-400 dark:border-gray-500  p-2">Phone Number</th>
+                <th class="border border-gray-400 dark:border-gray-500  p-2">Email Address</th>
+                <th class="border border-gray-400 dark:border-gray-500  p-2">Course</th>
+                <th class="border border-gray-400 dark:border-gray-500  p-2">status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% user.forEach((user,index)=> { %>
+                <tr>
+                    <td class="border border-gray-400 dark:border-gray-500  p-2">
+                        <%= index+1 %>
+                    </td>
+                    <td class="border border-gray-400 dark:border-gray-500  p-2">
+                        <%= user.name %>
+                    </td>
+                    <td class="border border-gray-400 dark:border-gray-500  p-2">
+                        <%= user.phone %>
+                    </td>
+                    <td class="border border-gray-400 dark:border-gray-500  p-2">
+                        <%= user.email %>
+                    </td>
+                    <td class="border border-gray-400 dark:border-gray-500  p-2">
+                        <%= user.service %>
+                    </td>
+                    <td class="border border-gray-400 dark:border-gray-500  p-2">
+                        <%= user.status %>
+                    </td>
+                </tr>
+
+                <% }) %>
+        </tbody>
+    </table>
+
+    <% } %>

@@ -4,7 +4,7 @@ const sendEmail = require('../src/utils/sendEmail')
 
 
 const scheduleEmail = () => {
-    cron.schedule('0 6 * * *', async () => {
+    cron.schedule('0 11 * * *', async () => {
         console.log('checking follow up')
         const currDate = new Date()
 
