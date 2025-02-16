@@ -24,8 +24,8 @@ const authSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'followup', 'cancel'],
-        default: 'pending'
+        enum: ['active', 'followup', 'cancel'],
+        default: 'active'
 
     },
     folloUp: {
@@ -34,6 +34,7 @@ const authSchema = new mongoose.Schema({
     },
     visitdate: {
         type: Date,
+        required: true
     },
     isFollowUp: {
         type: Boolean,

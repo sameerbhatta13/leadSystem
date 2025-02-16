@@ -9,6 +9,8 @@ const app = express()
 let port = process.env.PORT
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 
 //template engine
 app.use(expressLayout)

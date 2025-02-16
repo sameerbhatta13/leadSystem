@@ -30,10 +30,12 @@ exports.postAuth = asyncHandler(async (req, res) => {
     if (existingUser == null) {
         user = await user.save()
         return res.status(200).json(new ApiResponse('successfully added the information', user))
+
     }
     else {
         throw new ('already exists')
     }
+
 
 })
 
@@ -84,3 +86,5 @@ exports.deleteAuth = asyncHandler(async (req, res) => {
     const user = await Auth.findByIdAndDelete(id)
     return res.status(200).json(new ApiResponse('user is deleted successfully'))
 })
+
+//get actions for user details

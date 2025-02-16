@@ -9,7 +9,7 @@ const scheduleEmail = () => {
         const currDate = new Date()
 
         const userToFollowup = await Auth.find({
-            status: 'pending',
+            status: 'active',
             folloUp: { $lte: currDate }
 
         })

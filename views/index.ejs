@@ -12,45 +12,49 @@
 </head>
 
 <body>
+
     <h1 class="text-3xl underline underline-offset-2 font-bold decoration-sky-500 decoration-2 text-center p-2 my-2">Add
         The
         Member</h1>
 
 
     <div class=" flex items-center justify-center flex-col gap-3.5">
-        <form action="/api/auth" method="post" class="border-l-2 max-w-2xl w-auto  ">
+        <form action="/api/auth" method="post" enctype="application/x-www-form-urlencoded"
+            class="border-l-2 max-w-2xl w-auto  ">
             <div class=" flex flex-wrap justify-between mx-2 my-3 gap-3 p-2   ">
                 <div class=" flex flex-col w-[48%]">
                     <label for="" class="font-bold my-2">Full Name: </label>
-                    <input type="text" placeholder="enter full name"
+                    <input type="text" placeholder="Enter Full Name" name="name"
                         class="bg-gray-200  border-gray-600  rounded-lg p-1">
 
                 </div>
                 <div class=" flex flex-col w-[48%]">
                     <label for="" class="font-bold my-2">Email: </label>
-                    <input type="text" placeholder="enter email" class=" bg-gray-200  border-gray-600 rounded-lg p-1">
+                    <input type="text" placeholder="Enter Email" name="email"
+                        class=" bg-gray-200  border-gray-600 rounded-lg p-1">
                 </div>
                 <div class=" flex flex-col w-[48%] ">
                     <label for="" class="font-bold my-2">phone: </label>
-                    <input type="text" placeholder="enter phone" class="bg-gray-200  border-gray-600 rounded-lg p-1">
+                    <input type="text" placeholder="Enter Phone" name="phone"
+                        class="bg-gray-200  border-gray-600 rounded-lg p-1">
                 </div>
                 <div class=" flex flex-col w-[48%]">
                     <label for="" class="font-bold my-2">Courses: </label>
                     <select name="service" id="" class="rounded-lg  p-1 bg-gray-200  border-gray-600" required>
                         <option value="">Selcet Below:-</option>
-                        <option value="mern">MERN stack</option>
-                        <option value="python">Python</option>
-                        <option value="django">Django</option>
-                        <option value="flutter">Flutter</option>
+                        <option value="MERN stack">MERN stack</option>
+                        <option value="Python Django">Python Django</option>
+                        <option value="Flutter">Flutter</option>
                     </select>
                 </div>
                 <div class=" flex flex-col w-[48%]">
                     <label for="" class="font-bold my-2">Budget: </label>
-                    <input type="text" placeholder="enter budget" class=" bg-gray-200  border-gray-600 rounded-lg p-1 ">
+                    <input type="text" placeholder="Enter Budget" name="budget"
+                        class=" bg-gray-200  border-gray-600 rounded-lg p-1 ">
                 </div>
                 <div class=" flex flex-col w-[48%]">
                     <label for="" class="font-bold my-2">Visiting Date: </label>
-                    <input type="date" placeholder="enter visting date"
+                    <input type="date" placeholder="Enter Visting Date" name="visitdate"
                         class="bg-gray-200  border-gray-600 rounded-lg p-1 ">
                 </div>
                 <button
