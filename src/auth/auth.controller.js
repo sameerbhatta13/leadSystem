@@ -7,7 +7,7 @@ const Auth = require('./auth.model')
 
 
 exports.postAuth = asyncHandler(async (req, res) => {
-    const { name, phone, email, service, budget } = req.body
+    const { name, phone, email, service, budget, visitdate } = req.body
 
     const tDate = new Date()
     tDate.setDate(tDate.getDate())
@@ -22,6 +22,7 @@ exports.postAuth = asyncHandler(async (req, res) => {
         email,
         service,
         budget,
+        visitdate,
         folloUp: followupUTC
     })
 

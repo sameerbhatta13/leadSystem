@@ -10,7 +10,8 @@ const scheduleEmail = () => {
 
         const userToFollowup = await Auth.find({
             status: 'active',
-            folloUp: { $lte: currDate }
+            // visitdate:{$lte:currDate},
+            folloUp: { $lte: currDate, }
 
         })
 

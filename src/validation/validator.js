@@ -37,6 +37,9 @@ exports.userValidation = [
             const visitDate = new Date(value)
             const today = new Date()
 
+            visitDate.setUTCHours(0, 0, 0, 0);
+            today.setUTCHours(0, 0, 0, 0);
+
             console.log(visitDate)
             console.log(today)
 
@@ -44,7 +47,7 @@ exports.userValidation = [
             if (visitDate < today) {
                 throw new ApiError('date is not valid !, please enter a valid date')
             }
-
+            return true
         })
 ]
 
