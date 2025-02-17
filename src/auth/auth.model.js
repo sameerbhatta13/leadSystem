@@ -1,47 +1,58 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const authSchema = new mongoose.Schema({
+const authSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-
     phone: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     service: {
-        type: String,
-        enum: ["MERN stack", "Python Django", "Flutter"],
-        required: true
+      type: String,
+      enum: [
+        "MERN Stack",
+        "Python Django",
+        "Flutter",
+        "App Development",
+        "Web Development",
+        "Digitial Marketing",
+        "Ui/Ux Design",
+        "",
+      ],
+      required: true,
     },
-    budget: {
-        type: Number,
+    total_budget: {
+      type: Number,
+    },
+    installment: {
+      type: [Number],
     },
     status: {
-        type: String,
-        enum: ['active', 'followup', 'cancel'],
-        default: 'active'
-
+      type: String,
+      enum: ["Active", "Follow Up", "Cancel", "Client", "Student"],
+      default: "Active",
     },
     folloUp: {
-        type: Date,
-        required: true
+      type: Date,
     },
-    visitdate: {
-        type: Date,
-        required: true
+    startDate: {
+      type: Date,
     },
-    isFollowUp: {
-        type: Boolean,
-        default: false
-    }
+    endDate: {
+      type: Date,
+    },
+    remarks: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
-
-}, { timestamps: true })
-
-module.exports = mongoose.model('Auth', authSchema)
+module.exports = mongoose.model("Auth", authSchema);
