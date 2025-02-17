@@ -42,8 +42,6 @@ exports.userValidation = [
     .withMessage("not a valid budget"),
 ];
 
-//validation result handler
-
 exports.validation = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
