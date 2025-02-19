@@ -32,34 +32,40 @@ exports.userValidation = [
 
   check("service")
     .notEmpty()
-    .withMessage("please select at least one")
-    .isIn(["MERN stack", "Python Django", "Flutter"])
-    .withMessage("course must be one of Mern Stack python flutter "),
+    .withMessage("please select at least one service")
+    .isIn(["MERN Stack",
+      "Python Django",
+      "Flutter",
+      "App Development",
+      "Web Development",
+      "Digitial Marketing",
+      "Ui/Ux Design"])
+    .withMessage("course must be one of the choice"),
 
-  check("budget")
-    .notEmpty()
-    .withMessage("please provide a budget")
-    .isNumeric()
-    .withMessage("not a valid budget"),
+  // check("budget")
+  //   .notEmpty()
+  //   .withMessage("please provide a budget for service")
+  //   .isNumeric()
+  //   .withMessage("not a valid budget"),
 
-  check("visitdate")
-    .notEmpty()
-    .withMessage("provide a date ")
-    .custom((value) => {
-      const visitDate = new Date(value);
-      const today = new Date();
+  // check("visitdate")
+  //   .notEmpty()
+  //   .withMessage("provide a visit date ")
+  //   .custom((value) => {
+  //     const visitDate = new Date(value);
+  //     const today = new Date();
 
-      visitDate.setUTCHours(0, 0, 0, 0);
-      today.setUTCHours(0, 0, 0, 0);
+  //     visitDate.setUTCHours(0, 0, 0, 0);
+  //     today.setUTCHours(0, 0, 0, 0);
 
-      console.log(visitDate);
-      console.log(today);
+  //     console.log(visitDate);
+  //     console.log(today);
 
-      if (visitDate < today) {
-        throw new ApiError("date is not valid !, please enter a valid date");
-      }
-      return true;
-    }),
+  //     if (visitDate < today) {
+  //       throw new ApiError("visit date is not valid !, please enter a valid date");
+  //     }
+  //     return true;
+  //   }),
 ];
 
 //validation result handler

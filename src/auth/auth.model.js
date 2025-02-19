@@ -24,7 +24,7 @@ const authSchema = new mongoose.Schema(
         "Web Development",
         "Digitial Marketing",
         "Ui/Ux Design",
-        "",
+
       ],
       required: true,
     },
@@ -39,7 +39,7 @@ const authSchema = new mongoose.Schema(
       enum: ["Active", "Follow Up", "Cancel", "Client", "Student"],
       default: "Active",
     },
-    folloUp: {
+    followUp: {
       type: Date,
     },
     startDate: {
