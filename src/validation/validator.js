@@ -25,47 +25,67 @@ exports.userValidation = [
     .isEmail()
     .withMessage("email format is incorrect"),
 
-  // body('projectname')
-  //     .notEmpty().withMessage('project Name required')
-  //     .isLength({ min: 3 }).withMessage('project name is smaller in length')
-  //     .isString().withMessage('provide a valid project name'),
-
   check("service")
     .notEmpty()
     .withMessage("please select at least one service")
-    .isIn(["MERN Stack",
+    .isIn([
+      "MERN Stack",
       "Python Django",
       "Flutter",
       "App Development",
       "Web Development",
-      "Digitial Marketing",
+      "Digital Marketing",
       "Ui/Ux Design"])
     .withMessage("course must be one of the choice"),
 
-  // check("budget")
-  //   .notEmpty()
-  //   .withMessage("please provide a budget for service")
-  //   .isNumeric()
-  //   .withMessage("not a valid budget"),
+  body("budget")
+    .optional()
+    .notEmpty()
+    .withMessage("please provide a budget for service")
+    .isNumeric()
+    .withMessage("not a valid budget"),
 
-  // check("visitdate")
-  //   .notEmpty()
-  //   .withMessage("provide a visit date ")
-  //   .custom((value) => {
-  //     const visitDate = new Date(value);
-  //     const today = new Date();
+  check("startDate")
+    .optional()
+    .notEmpty()
+    .withMessage("provide a start date ")
+    .custom((value) => {
+      const visitDate = new Date(value);
+      const today = new Date();
 
-  //     visitDate.setUTCHours(0, 0, 0, 0);
-  //     today.setUTCHours(0, 0, 0, 0);
+      visitDate.setUTCHours(0, 0, 0, 0);
+      today.setUTCHours(0, 0, 0, 0);
 
-  //     console.log(visitDate);
-  //     console.log(today);
+      console.log(visitDate);
+      console.log(today);
 
-  //     if (visitDate < today) {
-  //       throw new ApiError("visit date is not valid !, please enter a valid date");
-  //     }
-  //     return true;
-  //   }),
+      if (visitDate < today) {
+        throw new ApiError("visit date is not valid !, please enter a valid date");
+      }
+      return true;
+    }),
+
+  check("endDate")
+    .if(body('startDate').exists()) //only chekcs when startdate is avalilable
+    .optional()
+    .notEmpty().withMessage('provide a end date also')
+    .custom((value, { req }) => {
+      const startDate = new Date(req.body.startDate)
+      const endDate = new Date(value)
+
+      startDate.setUTCHours(0, 0, 0, 0)
+      endDate.setUTCHours(0, 0, 0, 0)
+
+      if (endDate < startDate) {
+        throw new ApiError('end date can not be less than start date')
+      }
+      return true
+    }),
+
+  check("remarks")
+    .optional()
+    .notEmpty().withMessage('please provide a remarks')
+
 ];
 
 //validation result handler

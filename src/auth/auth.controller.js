@@ -17,7 +17,7 @@ exports.postAuth = asyncHandler(async (req, res) => {
 });
 
 exports.getAuth = asyncHandler(async (req, res) => {
-    const users = await Auth.find();
+    const users = await Auth.find().sort({ createdAt: 1 })
     if (!users) {
         throw new ApiError("no user is found");
     }
@@ -62,7 +62,6 @@ exports.deleteAuth = asyncHandler(async (req, res) => {
 
 exports.filterAuth = asyncHandler(async (req, res) => {
     const { status } = req.query
-    console.log(status)
     const data = await Auth.find({
         status: status
     })
@@ -72,8 +71,4 @@ exports.filterAuth = asyncHandler(async (req, res) => {
     else {
         return res.status(200).json(new ApiResponse('here is user with this status', data))
     }
-
-
-
-
 })

@@ -22,7 +22,7 @@ const authSchema = new mongoose.Schema(
         "Flutter",
         "App Development",
         "Web Development",
-        "Digitial Marketing",
+        "Digital Marketing",
         "Ui/Ux Design",
 
       ],
@@ -42,6 +42,11 @@ const authSchema = new mongoose.Schema(
     followUp: {
       type: Date,
     },
+    isFollowUp: {
+      type: Boolean,
+      default: false
+
+    },
     startDate: {
       type: Date,
     },
@@ -51,6 +56,9 @@ const authSchema = new mongoose.Schema(
     remarks: {
       type: String,
     },
+  },
+  {
+    strict: false
   },
   { timestamps: true }
 );

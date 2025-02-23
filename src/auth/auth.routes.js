@@ -7,7 +7,7 @@ const router = express.Router()
 router.post('/auth', userValidation, validation, postAuth)
 router.get('/auth', getAuth)
 router.get('/auth/:id', getAuthById)
-router.put('/auth/:id', updateAuth)
+router.put('/auth/:id', userValidation, validation, updateAuth)
 router.delete('/auth/:id', deleteAuth)
 router.get('/authfilter', filterAuth)
 

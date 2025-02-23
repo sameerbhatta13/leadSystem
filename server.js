@@ -4,7 +4,7 @@ const cors = require('cors')
 const express = require("express");
 
 const userRoute = require("./src/auth/auth.routes");
-const startFollowSchedule = require("./middleware/emailSchedular");
+const { scheduleEmail, scheduleEmailForClient } = require("./middleware/emailSchedular");
 const { notFound, erroMiddleware } = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -26,7 +26,8 @@ app.use(notFound);
 app.use(erroMiddleware);
 
 //send follow up emails
-startFollowSchedule();
+// scheduleEmail();
+scheduleEmailForClient()
 
 app.listen(port, () => {
   console.log(`server is connected at ${port}`);
