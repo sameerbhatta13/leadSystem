@@ -56,7 +56,7 @@ const scheduleEmail = () => {
 
 
 const scheduleEmailForClient = () => {
-    cron.schedule('44 13 * * *', async () => {
+    cron.schedule('45 10 * * *', async () => {
         console.log('checking client followup')
 
         const currDate = new Date()
