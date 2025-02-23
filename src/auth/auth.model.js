@@ -16,6 +16,7 @@ const authSchema = new mongoose.Schema(
     },
     service: {
       type: String,
+<<<<<<< HEAD
       enum: [
         "MERN Stack",
         "Python Django",
@@ -63,4 +64,33 @@ const authSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+=======
+      enum: ["MERN stack", "Python Django", "Flutter"],
+      required: true,
+    },
+    budget: {
+      type: Number,
+    },
+    status: {
+      type: String,
+      enum: ["active", "followup", "cancel"],
+      default: "active",
+    },
+    folloUp: {
+      type: Date,
+      required: true,
+    },
+    visitdate: {
+      type: Date,
+      required: true,
+    },
+    isFollowUp: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+
+>>>>>>> 227d1bbda7339ec1bcbe8a9c7680b4eb39751764
 module.exports = mongoose.model("Auth", authSchema);
