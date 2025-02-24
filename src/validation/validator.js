@@ -3,6 +3,7 @@ const ApiError = require("../utils/apiError");
 
 exports.userValidation = [
   check("name")
+    .optional()
     .notEmpty()
     .withMessage("name must be required")
     .isLength({ min: 2 })
@@ -11,6 +12,7 @@ exports.userValidation = [
     .withMessage("name must be a string"),
 
   check("phone")
+    .optional()
     .notEmpty()
     .withMessage("phone number is required")
     .isLength({ min: 10, max: 10 })
@@ -20,12 +22,14 @@ exports.userValidation = [
     .withMessage("enter a valid number"),
 
   check("email")
+    .optional()
     .notEmpty()
     .withMessage("email is required")
     .isEmail()
     .withMessage("email format is incorrect"),
 
   check("service")
+    .optional()
     .notEmpty()
     .withMessage("please select at least one service")
     .isIn([
@@ -84,8 +88,28 @@ exports.userValidation = [
 
   check("remarks")
     .optional()
-    .notEmpty().withMessage('please provide a remarks')
+    .notEmpty().withMessage('please provide a remarks'),
 
+  check("installment")
+    .optional()
+    .notEmpty().withMessage('provide a at least first installment')
+    .custom((value, { req }) => {
+      // if (!Array.isArray(value)) {
+      //   throw new ApiError('installment should be array of numbers')
+      // }
+
+      const budget = req.body.total_budget
+
+      value.forEach((inst) => {
+        if (typeof inst !== "number") {
+          throw new ApiError('installment is should be array')
+        }
+        if (inst > budget) {
+          throw new ApiError('installment cannot be greater than budget')
+        }
+      })
+      return true
+    })
 ];
 
 //validation result handler
