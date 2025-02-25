@@ -4,8 +4,10 @@ const cors = require('cors')
 const express = require("express");
 
 const userRoute = require("./src/auth/auth.routes");
+const adminRoute = require('./src/admin/admin.route')
 const { scheduleEmail, scheduleEmailForClient } = require("./middleware/emailSchedular");
 const { notFound, erroMiddleware } = require("./middleware/errorMiddleware");
+
 
 const app = express();
 let port = process.env.PORT;
@@ -20,14 +22,16 @@ app.use(express.json());
 
 //implement routes
 app.use("/api", userRoute);
+app.use('/api', adminRoute)
 
 //middleware
 app.use(notFound);
 app.use(erroMiddleware);
 
 //send follow up emails
-// scheduleEmail();
+scheduleEmail();
 scheduleEmailForClient()
+
 
 app.listen(port, () => {
   console.log(`server is connected at ${port}`);

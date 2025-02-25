@@ -1,6 +1,6 @@
 const cron = require('node-cron')
 const Auth = require('../src/auth/auth.model')
-const sendEmail = require('../src/utils/sendEmail')
+const { sendEmail } = require('../src/utils/sendEmail')
 
 
 const scheduleEmail = () => {
@@ -54,6 +54,9 @@ const scheduleEmail = () => {
     })
 }
 
+
+
+//sending email for the client dead line coming
 
 const scheduleEmailForClient = () => {
     cron.schedule('45 10 * * *', async () => {
