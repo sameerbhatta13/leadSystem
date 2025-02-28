@@ -47,3 +47,5 @@ exports.deleteService = asyncHandler(async (req, res) => {
     const service = await Service.findByIdAndDelete(req.params.id)
     return res.status(200).json(new ApiResponse('service deleted successfully'))
 })
+
+
