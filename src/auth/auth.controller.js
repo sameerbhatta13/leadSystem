@@ -3,6 +3,7 @@ const ApiError = require("../utils/apiError");
 const asyncHandler = require("../utils/asyncHandler");
 const ApiResponse = require("../utils/apiResponse");
 const Auth = require("./auth.model");
+const Service = require('../services/service.model')
 
 exports.postAuth = asyncHandler(async (req, res) => {
     const existingUser = await Auth.findOne({ email: req.body.email });
@@ -17,7 +18,7 @@ exports.postAuth = asyncHandler(async (req, res) => {
 });
 
 exports.getAuth = asyncHandler(async (req, res) => {
-    const users = await Auth.find().sort({ createdAt: 1 })
+    const users = await Auth.find().sort({ status: 1 })
     if (!users) {
         throw new ApiError("no user is found");
     }

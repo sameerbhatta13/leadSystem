@@ -28,19 +28,19 @@ exports.userValidation = [
     .isEmail()
     .withMessage("email format is incorrect"),
 
-  check("service")
-    .optional()
-    .notEmpty()
-    .withMessage("please select at least one service")
-    .isIn([
-      "MERN Stack",
-      "Python Django",
-      "Flutter",
-      "App Development",
-      "Web Development",
-      "Digital Marketing",
-      "Ui/Ux Design"])
-    .withMessage("course must be one of the choice"),
+  // check("service")
+  //   .optional()
+  //   .notEmpty()
+  //   .withMessage("please select at least one service")
+  //   .isIn([
+  //     "MERN Stack",
+  //     "Python Django",
+  //     "Flutter",
+  //     "App Development",
+  //     "Web Development",
+  //     "Digital Marketing",
+  //     "Ui/Ux Design"])
+  //   .withMessage("course must be one of the choice"),
 
   body("budget")
     .optional()

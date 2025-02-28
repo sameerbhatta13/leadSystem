@@ -37,7 +37,6 @@ const scheduleEmail = () => {
                     html: `<h1>here is the detail information of the ${user.name}</h1>
                     <p>student phone Number:<b> ${user.phone} </b></p>
                     <p>student phone Number:<b> ${user.email} </b></p>
-                    <p>student enquires for:<b> ${user.service}</b></p>
                     <p>course fees:<b> ${user.budget} </b></p>
                     `
                 })

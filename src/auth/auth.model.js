@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const { ObjectId } = mongoose.Schema
+
 const authSchema = new mongoose.Schema(
   {
     name: {
@@ -15,17 +17,8 @@ const authSchema = new mongoose.Schema(
       required: true,
     },
     service: {
-      type: String,
-      enum: [
-        "MERN Stack",
-        "Python Django",
-        "Flutter",
-        "App Development",
-        "Web Development",
-        "Digital Marketing",
-        "Ui/Ux Design",
-
-      ],
+      type: ObjectId,
+      ref: 'Service',
       required: true,
     },
     total_budget: {
@@ -56,11 +49,7 @@ const authSchema = new mongoose.Schema(
     remarks: {
       type: String,
     },
-  },
-  {
-    strict: false
-  },
-  { timestamps: true }
-);
+
+  }, { timestamps: true, strict: false });
 
 module.exports = mongoose.model("Auth", authSchema);

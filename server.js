@@ -5,6 +5,7 @@ const express = require("express");
 
 const userRoute = require("./src/auth/auth.routes");
 const adminRoute = require('./src/admin/admin.route')
+const serviceRoute = require('./src/services/services.route')
 const { scheduleEmail, scheduleEmailForClient } = require("./middleware/emailSchedular");
 const { notFound, erroMiddleware } = require("./middleware/errorMiddleware");
 
@@ -23,6 +24,7 @@ app.use(express.json());
 //implement routes
 app.use("/api", userRoute);
 app.use('/api', adminRoute)
+app.use('/api', serviceRoute)
 
 //middleware
 app.use(notFound);
