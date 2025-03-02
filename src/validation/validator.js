@@ -94,13 +94,16 @@ exports.userValidation = [
     .optional()
     .notEmpty().withMessage('provide a at least first installment')
     .custom((value, { req }) => {
+
+      let installments = Array.isArray(value) ? value : [value];
       // if (!Array.isArray(value)) {
       //   throw new ApiError('installment should be array of numbers')
       // }
 
+      console.log("first", value)
       const budget = req.body.total_budget
 
-      value.forEach((inst) => {
+      installments.forEach((inst) => {
         if (typeof inst !== "number") {
           throw new ApiError('installment is should be array')
         }
@@ -115,12 +118,12 @@ exports.userValidation = [
 //validation result handler
 
 exports.validation = (req, res, next) => {
-  const errors = validationResult(req);
-  console.log(errors);
+  const errors = validationResult(req)
+  console.log(errors)
 
   if (errors.isEmpty()) {
-    return next();
+    return next()
   }
 
-  return res.status(400).json({ error: errors.array()[0].msg });
-};
+  return res.status(400).json({ error: errors.array()[0].msg })
+}
