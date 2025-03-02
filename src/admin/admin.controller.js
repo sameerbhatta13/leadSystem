@@ -65,6 +65,15 @@ exports.forgetPassword = asyncHandler(async (req, res) => {
 
 })
 
+
+exports.adminDetails = asyncHandler(async (req, res) => {
+    const { _id } = req.user
+    const admin = await Admin.findById(_id).select('-password')
+    if (!admin) {
+        throw new ApiError('admin is not found ', 400)
+    }
+    res.status(200).json(new ApiResponse('here is the admin info', admin))
+})
 exports.logout = asyncHandler(async (req, res) => {
 
 })
