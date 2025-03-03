@@ -13,6 +13,9 @@ const adminSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'admin'
+    },
+    otp: {
+        type: String,
     }
 }, { timestamps: true });
 

@@ -58,11 +58,30 @@ exports.forgetPassword = asyncHandler(async (req, res) => {
     sendEmailFP({
         to: checkEmail.email,
         subject: `Reset Password OTP`,
-        html: `do not share your otp , use this otp to resent password </br> ${newOtp}`
+        html: `do not share your otp , use this otp to resent password </br> <b>${newOtp}</b>`
     })
-    res.json(new ApiResponse('otp is sent to reset passsword to your gmail'))
+    await Admin.findOneAndUpdate({ email }, {
+        otp: newOtp
+    }, { new: true })
+    res.json(new ApiResponse('otp is sent to reset passsword to your gmail', { adminId: checkEmail._id }))
 
 
+})
+
+exports.verifyOtp = asyncHandler(async (req, res) => {
+    const { otp } = req.body
+    if (!otp) {
+        throw new ApiError('provide a otp')
+    }
+    const admin = await Admin.findOne({ otp: otp })
+    if (!admin) {
+        throw new ApiError('otp does not match')
+    }
+
+    await Admin.findOneAndUpdate({ otp }, {
+        otp: ''
+    })
+    res.json(new ApiResponse('otp is verified '))
 })
 
 
@@ -75,6 +94,21 @@ exports.adminDetails = asyncHandler(async (req, res) => {
     res.status(200).json(new ApiResponse('here is the admin info', admin))
 })
 exports.logout = asyncHandler(async (req, res) => {
+
+})
+
+exports.updateAdmin = asyncHandler(async (req, res) => {
+    const update = await Admin.findByIdAndUpdate(req.params.id, req.body,
+        { new: true })
+
+    if (!update) {
+        throw new ApiError("admin not found");
+    }
+    else {
+        return res
+            .status(200)
+            .json(new ApiResponse(" updated successfully", update));
+    }
 
 })
 
