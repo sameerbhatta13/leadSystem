@@ -17,7 +17,7 @@ const adminSchema = new mongoose.Schema({
     otp: {
         type: String,
     }
-}, { timestamps: true });
+}, { timestamps: true })
 
 const Admin = mongoose.model('Admin', adminSchema);
-module.exports = Admin;
+module.exports = Admin
