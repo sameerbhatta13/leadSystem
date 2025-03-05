@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const authMiddleware = asyncHandler(async (req, res, next) => {
     try {
         const token = req.header("authorization")?.replace("Bearer ", "")
-        console.log("received Token", token)
+        // console.log("received Token", token)
 
         if (!token) {
             throw new ApiError('token is not found')
