@@ -16,7 +16,7 @@ exports.userValidation = [
     .notEmpty()
     .withMessage("phone number is required")
     .isLength({ min: 10, max: 10 })
-    .withMessage("enter a valid phone  number")
+    .withMessage("Enter a valid phone number.")
     // .matches(/g/).withMessage('enter a valid number ')
     .isNumeric()
     .withMessage("enter a valid number"),
@@ -86,9 +86,9 @@ exports.userValidation = [
       return true
     }),
 
-  check("remarks")
-    .optional()
-    .notEmpty().withMessage('please provide a remarks'),
+  // check("remarks")
+  //   .optional()
+  //   .notEmpty().withMessage('please provide a remarks'),
 
   check("installment")
     .optional()
@@ -102,15 +102,16 @@ exports.userValidation = [
 
       console.log("first", value)
       const budget = req.body.total_budget
-
+      let sum = 0
       installments.forEach((inst) => {
         if (typeof inst !== "number") {
           throw new ApiError('installment is should be array')
         }
-        if (inst > budget) {
-          throw new ApiError('installment cannot be greater than budget')
-        }
+        sum += inst
       })
+      if (sum > budget) {
+        throw new ApiError('installment cannot be greater than budget')
+      }
       return true
     })
 ];
@@ -125,5 +126,5 @@ exports.validation = (req, res, next) => {
     return next()
   }
 
-  return res.status(400).json({ error: errors.array()[0].msg })
+  throw new ApiError(errors.array()[0].msg, 400)
 }
