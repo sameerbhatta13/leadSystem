@@ -15,7 +15,7 @@ let port = process.env.PORT;
 
 //cors middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://0.0.0.0:5173', 'http://192.168.18.102:5173'],
+  origin: ['http://localhost:5173', `http://${process.env.IPADDRESS}:5173`],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 
@@ -37,6 +37,6 @@ scheduleEmail();
 scheduleEmailForClient()
 
 
-app.listen(port, "192.168.18.102", () => {
-  console.log(`server is connected at http://192.168.18.102:${port}`);
+app.listen(port, process.env.IPADDRESS, () => {
+  console.log(`server is connected at http://${process.env.IPADDRESS}:${port}`);
 });

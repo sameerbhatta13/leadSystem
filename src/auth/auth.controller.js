@@ -67,7 +67,7 @@ exports.filterAuth = asyncHandler(async (req, res) => {
         status: status
     })
     if (data.length == 0) {
-        throw new ApiError('no user with this status')
+        throw new ApiError('no user with this status', 400)
     }
     else {
         return res.status(200).json(new ApiResponse('here is user with this status', data))
