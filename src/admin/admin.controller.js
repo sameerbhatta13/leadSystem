@@ -34,7 +34,7 @@ exports.postLogin = asyncHandler(async (req, res) => {
 
     const admin = await Admin.findOne({ email })
 
-    if (!admin) throw new ApiError('admin with this email does not exits', 403)
+    if (!admin) throw new ApiError('wrong email', 403)
 
     if (admin.password !== password) {
         throw new ApiError('email or password does not match', 400)

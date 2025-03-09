@@ -116,15 +116,17 @@ exports.userValidation = [
     })
 ];
 
+
 //validation result handler
+
 
 exports.validation = (req, res, next) => {
   const errors = validationResult(req)
   console.log(errors)
 
-  if (errors.isEmpty()) {
-    return next()
+  if (!errors.isEmpty()) {
+    throw new ApiError(errors.array()[0].msg, 400)
   }
 
-  throw new ApiError(errors.array()[0].msg, 400)
+  return next()
 }

@@ -2,6 +2,7 @@ require("dotenv").config();
 require("./DB/connection");
 const cors = require('cors')
 const express = require("express");
+const morgan = require('morgan')
 
 const userRoute = require("./src/auth/auth.routes");
 const adminRoute = require('./src/admin/admin.route')
@@ -18,13 +19,13 @@ app.use(cors({
   origin: ['http://localhost:5173', `http://${process.env.IPADDRESS}:5173`],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
-
 }))
 
 app.use(express.json());
+app.use(morgan('dev'))
 
 //implement routes
-app.use("/api", userRoute);
+app.use("/api", userRoute)
 app.use('/api', adminRoute)
 app.use('/api', serviceRoute)
 
