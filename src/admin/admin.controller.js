@@ -111,8 +111,3 @@ exports.updateAdmin = asyncHandler(async (req, res) => {
     }
 
 })
-
-
-
-
-
