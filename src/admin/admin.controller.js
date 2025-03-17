@@ -93,6 +93,7 @@ exports.adminDetails = asyncHandler(async (req, res) => {
     }
     res.status(200).json(new ApiResponse('here is the admin info', admin))
 })
+
 exports.logout = asyncHandler(async (req, res) => {
 
 })
@@ -102,7 +103,7 @@ exports.updateAdmin = asyncHandler(async (req, res) => {
         { new: true })
 
     if (!update) {
-        throw new ApiError("admin not found");
+        throw new ApiError("admin not found")
     }
     else {
         return res

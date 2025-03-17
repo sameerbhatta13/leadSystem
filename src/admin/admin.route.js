@@ -12,5 +12,4 @@ router.get('/admin', authMiddleware, adminDetails)
 router.post('/verify', verifyOtp)
 router.put('/admin/:id', updateAdmin)
 
-
 module.exports = router
