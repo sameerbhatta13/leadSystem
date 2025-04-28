@@ -38,6 +38,6 @@ scheduleEmail();
 scheduleEmailForClient()
 
 
-app.listen(port, process.env.IPADDRESS, () => {
-  console.log(`server is connected at http://${process.env.IPADDRESS}:${port}`);
+app.listen(port, () => {
+  console.log(`server is connected at ${port}`);
 });
